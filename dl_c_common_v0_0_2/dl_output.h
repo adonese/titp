@@ -42,6 +42,12 @@ void DL_OUTPUT_Hex ( FILE           *iOutFile,
 					 const DL_UINT8 *iPtr,
 					 DL_UINT32       iNumBytes );
 
+char * DL_OUTPUT(
+		const char *_iEolStr,
+		const DL_UINT8 *iPtr,
+		DL_UINT32 iNumBytes);
+
+char * alpha();
 /******************************************************************************/
 
 #endif /* __INC_DL_OUTPUT */

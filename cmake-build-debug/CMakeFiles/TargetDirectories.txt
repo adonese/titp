@@ -1,0 +1,3 @@
+/home/adonese/CLionProjects/titp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/adonese/CLionProjects/titp/cmake-build-debug/CMakeFiles/titp_exe.dir
+/home/adonese/CLionProjects/titp/cmake-build-debug/CMakeFiles/edit_cache.dir

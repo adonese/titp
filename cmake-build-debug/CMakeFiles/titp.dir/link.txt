@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtitp.a  CMakeFiles/titp.dir/demo.c.o
+/usr/bin/ranlib libtitp.a

@@ -26,6 +26,7 @@
 /*                                                                            */
 /******************************************************************************/
 
+#include <string.h>
 #include "dl_output.h"
 
 /******************************************************************************/
@@ -33,36 +34,70 @@
 // CONSTANTS
 //
 
-#define kDL_OUTPUT_HEX_COLS		16
+#define kDL_OUTPUT_HEX_COLS        16
 
 /******************************************************************************/
 
-void DL_OUTPUT_Hex ( FILE           *iOutFile,
-					 const char     *_iEolStr,
-					 const DL_UINT8 *iPtr,
-					 DL_UINT32       iNumBytes )
-{
-	DL_UINT32  rowIdx,
-		       colIdx;
-	char      *tmpEOL  = _iEolStr == NULL ? "\n" : _iEolStr;
+void DL_OUTPUT_Hex(FILE *iOutFile,
+                   const char *_iEolStr,
+                   const DL_UINT8 *iPtr,
+                   DL_UINT32 iNumBytes) {
+    DL_UINT32 rowIdx,
+            colIdx;
+    char *tmpEOL = _iEolStr == NULL ? "\n" : _iEolStr;
 
-	for ( rowIdx=0 ; rowIdx<(iNumBytes+kDL_OUTPUT_HEX_COLS-1)/kDL_OUTPUT_HEX_COLS ; rowIdx++ )
-	{
-		/* output hex characters */
-		for ( colIdx=0 ; colIdx<kDL_OUTPUT_HEX_COLS ; colIdx++ )
-		{
-			DL_UINT32 offset = (rowIdx * kDL_OUTPUT_HEX_COLS) + colIdx;
+    for (rowIdx = 0; rowIdx < (iNumBytes + kDL_OUTPUT_HEX_COLS - 1) / kDL_OUTPUT_HEX_COLS; rowIdx++) {
+        /* output hex characters */
+        for (colIdx = 0; colIdx < kDL_OUTPUT_HEX_COLS; colIdx++) {
+            DL_UINT32 offset = (rowIdx * kDL_OUTPUT_HEX_COLS) + colIdx;
 
-			if ( offset >= iNumBytes )
-				fprintf(iOutFile,"");
-			else
-				fprintf(iOutFile,"%02x",(int)(iPtr[offset]));
-		} /* end-for (colIdx) */
+            if (offset >= iNumBytes)
+                fprintf(iOutFile, "");
+            else
+                fprintf(iOutFile, "%02x", (int) (iPtr[offset]));
+        } /* end-for (colIdx) */
 
-	} /* end-for (rowIdx) */
-	
-	//fprintf(iOutFile, "%d", strlen(*iPtr));
-	return;
+    } /* end-for (rowIdx) */
+
+    //fprintf(iOutFile, "%d", strlen(*iPtr));
 }
 
-/******************************************************************************/
+
+ char * DL_OUTPUT(
+         const char *_iEolStr,
+         const DL_UINT8 *iPtr,
+         DL_UINT32 iNumBytes) {
+
+    DL_UINT32 rowIdx, colIdx;
+    char *output = malloc(128);
+
+    for (rowIdx = 0; rowIdx < (iNumBytes + kDL_OUTPUT_HEX_COLS - 1) / kDL_OUTPUT_HEX_COLS; rowIdx++) {
+        /* output hex characters */
+        for (colIdx = 0; colIdx < kDL_OUTPUT_HEX_COLS; colIdx++) {
+            DL_UINT32 offset = (rowIdx * kDL_OUTPUT_HEX_COLS) + colIdx;
+
+            if (offset >= iNumBytes)
+                sprintf(output, "");
+            else
+                sprintf(output, "%02x", (int) (iPtr[offset]));
+        } /* end-for (colIdx) */
+
+    } /* end-for (rowIdx) */
+
+    return output;
+}
+
+char * alpha(){
+    char *digit = malloc(sizeof(char));
+    char *output = malloc(sizeof(char));
+//    output[sizeof(output)-1] = '\0';
+//    output[sizeof(digit)-1] = '\0';
+
+    for (int idx = 0; idx <= 28; idx ++){
+        sprintf(digit, "%d", idx);
+        strcat(output, digit);
+    }
+
+    char *returned = output;
+    return returned;
+}
