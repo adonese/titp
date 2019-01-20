@@ -48,9 +48,10 @@ int main ( void )
 //	DL_OUTPUT_Hex(stdout,NULL,packBuf,packedSize);
 //	DL_OUTPUT(NULL, packBuf, packedSize);
 
-//	char *s;
-//    s =  DL_OUTPUT(NULL, packBuf, packedSize);
-//    printf("%s\n", s);
+	char *s;
+    s =  DL_OUTPUT(NULL, packBuf, packedSize);
+    printf("%s\n", s);
+
     char *b;
     b = alpha();
     printf("It is working %s\n", alpha());

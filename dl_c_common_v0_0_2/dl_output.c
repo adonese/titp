@@ -63,37 +63,44 @@ void DL_OUTPUT_Hex(FILE *iOutFile,
 }
 
 
- char * DL_OUTPUT(
-         const char *_iEolStr,
-         const DL_UINT8 *iPtr,
-         DL_UINT32 iNumBytes) {
+char *DL_OUTPUT(
+        const char *_iEolStr,
+        const DL_UINT8 *iPtr,
+        DL_UINT32 iNumBytes) {
 
     DL_UINT32 rowIdx, colIdx;
-    char *output = malloc(128);
+    char digit[1024];
+    char output[1024];
 
     for (rowIdx = 0; rowIdx < (iNumBytes + kDL_OUTPUT_HEX_COLS - 1) / kDL_OUTPUT_HEX_COLS; rowIdx++) {
         /* output hex characters */
         for (colIdx = 0; colIdx < kDL_OUTPUT_HEX_COLS; colIdx++) {
             DL_UINT32 offset = (rowIdx * kDL_OUTPUT_HEX_COLS) + colIdx;
 
-            if (offset >= iNumBytes)
-                sprintf(output, "");
-            else
-                sprintf(output, "%02x", (int) (iPtr[offset]));
+            if (offset >= iNumBytes){
+                sprintf(digit, "");
+                strcat(output, digit);
+            }
+            else{
+                sprintf(digit, "%02x", (int) (iPtr[offset]));
+                strcat(output, digit);
+            }
+
         } /* end-for (colIdx) */
 
     } /* end-for (rowIdx) */
 
-    return output;
+    char *r = output;
+    return r;
 }
 
-char * alpha(){
-    char *digit = malloc(sizeof(char));
-    char *output = malloc(sizeof(char));
-//    output[sizeof(output)-1] = '\0';
-//    output[sizeof(digit)-1] = '\0';
+char *alpha() {
+    char digit[100];
+    char output[100];
 
-    for (int idx = 0; idx <= 28; idx ++){
+    memset(digit, 0, sizeof(digit));
+    memset(output, 0, sizeof(output));
+    for (int idx = 0; idx <= 28; idx++) {
         sprintf(digit, "%d", idx);
         strcat(output, digit);
     }
