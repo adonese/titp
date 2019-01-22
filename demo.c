@@ -7,7 +7,6 @@
 #include "dl_output.h" // for 'DL_OUTPUT_Hex'
 
 
-
 int main ( void )
 {
 	DL_ISO8583_HANDLER isoHandler;
@@ -36,17 +35,12 @@ int main ( void )
 
 	/* output ISO message content */
 	DL_ISO8583_MSG_Dump(stdout,NULL,&isoHandler,&isoMsg);
-//	printf("the iso8583 is \n%s", &isoMsg);
 
 	/* pack ISO message */
 	(void)DL_ISO8583_MSG_Pack(&isoHandler,&isoMsg,packBuf,&packedSize);
 
 	/* free ISO message */
 	DL_ISO8583_MSG_Free(&isoMsg);
-
-	/* output packed message (in hex) */
-//	DL_OUTPUT_Hex(stdout,NULL,packBuf,packedSize);
-//	DL_OUTPUT(NULL, packBuf, packedSize);
 
 	char *s;
     s =  DL_OUTPUT(NULL, packBuf, packedSize);
@@ -56,22 +50,5 @@ int main ( void )
     b = alpha();
     printf("It is working %s\n", alpha());
     printf("%d\n", (int)strlen(b));
-//    free(s);
-	//
-	// Unpack message
-	//
-
-//	/* initialise ISO message */
-//	DL_ISO8583_MSG_Init(NULL,0,&isoMsg);
-//
-//	/* unpack ISO message */
-//	(void)DL_ISO8583_MSG_Unpack(&isoHandler,packBuf,packedSize,&isoMsg);
-//
-//	/* output ISO message content */
-//	DL_ISO8583_MSG_Dump(stdout,NULL,&isoHandler,&isoMsg);
-//
-//	/* free ISO message */
-//	DL_ISO8583_MSG_Free(&isoMsg);
-
 	return 0;
 }
